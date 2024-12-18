@@ -9,6 +9,7 @@ namespace ExampleGraphQL.Models
         public string? Title { get; set; }
         public string? Content { get; set; }
         public DateTime? CreateAt { get; set; }
+        public string? Author { get; set; }
         public ICollection<Comment> Comments { get; set; }
         public Post()
         {
