@@ -7,9 +7,9 @@ namespace ExampleGraphQL.Models
     {
         [Key]
         public Guid Id { get; set; }
-        public string? Content { get; set; }
+        public string Content { get; set; }
         public DateTime CreatedAt { get; set; }
-        public string? Author { get; set; }
+        public string Author { get; set; }
         [ForeignKey("PostId")]
         public Guid PostId { get; set; }
         public Post? Post { get; set; }
