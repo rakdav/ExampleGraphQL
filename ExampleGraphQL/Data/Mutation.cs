@@ -28,9 +28,23 @@ namespace ExampleGraphQL.Data
         [Serial]
         public async Task DeletePost(
             [Service]
-        BlogDbContext context, int id)
+        BlogDbContext context, Post model)
         {
-
+            var post = await context.Posts.Where(p => p.Id ==model.Id).FirstOrDefaultAsync();
+            if (post != null)
+            {
+                context.Posts.Remove(post);
+                await context.SaveChangesAsync();
+            }
+        }
+        [Serial]
+        public async Task<Post?> InsertPost(
+           [Service]
+        BlogDbContext context, Post model)
+        {
+            context.Posts.Add(model);
+            await context.SaveChangesAsync();
+            return model;
         }
     }
 }
