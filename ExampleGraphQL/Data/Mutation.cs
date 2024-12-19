@@ -40,11 +40,17 @@ namespace ExampleGraphQL.Data
         [Serial]
         public async Task<Post?> InsertPost(
            [Service]
-        BlogDbContext context, Post model)
+        BlogDbContext context, string _author, string _content,string _title)
         {
-            context.Posts.Add(model);
+            Post post = new Post()
+            {
+                Author=_author,
+                Content=_content,
+                Title=_title
+            };
+            context.Posts.Add(post);
             await context.SaveChangesAsync();
-            return model;
+            return post;
         }
     }
 }
