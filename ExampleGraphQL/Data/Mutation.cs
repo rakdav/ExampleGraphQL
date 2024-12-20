@@ -28,9 +28,9 @@ namespace ExampleGraphQL.Data
         [Serial]
         public async Task DeletePost(
             [Service]
-        BlogDbContext context, Post model)
+        BlogDbContext context, Guid id)
         {
-            var post = await context.Posts.Where(p => p.Id ==model.Id).FirstOrDefaultAsync();
+            var post = await context.Posts.Where(p => p.Id ==id).FirstOrDefaultAsync();
             if (post != null)
             {
                 context.Posts.Remove(post);
@@ -40,13 +40,13 @@ namespace ExampleGraphQL.Data
         [Serial]
         public async Task<Post?> InsertPost(
            [Service]
-        BlogDbContext context, string _author, string _content,string _title)
+        BlogDbContext context, string author, string content,string title)
         {
             Post post = new Post()
             {
-                Author=_author,
-                Content=_content,
-                Title=_title
+                Author=author,
+                Content=content,
+                Title=title
             };
             context.Posts.Add(post);
             await context.SaveChangesAsync();
