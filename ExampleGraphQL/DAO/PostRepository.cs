@@ -45,7 +45,7 @@ namespace ExampleGraphQL.DAO
                 db.Posts.Update(post);
                 await db.SaveChangesAsync();
             }
-            return post;
+            return post!;
         }
         public async Task DeletePost(Guid id)
         {
@@ -56,6 +56,12 @@ namespace ExampleGraphQL.DAO
                 await db.SaveChangesAsync();
             }
         }
-
+        public Post GetPostById(Guid Id)
+        {
+            var post = db.Posts.Include(p => p.Comments).
+                FirstOrDefault(p=>p.Id==Id);
+            if (post != null) return post;
+            return null!;
+        }
     }
 }

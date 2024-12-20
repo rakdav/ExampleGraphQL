@@ -38,7 +38,7 @@ namespace ExampleGraphQL.DAO
                 db.Comments.Update(comment);
                 await db.SaveChangesAsync();
             }
-            return comment;
+            return comment!;
         }
         public async Task DeleteComment(Guid id)
         {
