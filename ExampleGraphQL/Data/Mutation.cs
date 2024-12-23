@@ -1,13 +1,13 @@
 ﻿using ExampleGraphQL.DAO;
 using ExampleGraphQL.Models;
 using HotChocolate.Authorization;
+using HotChocolate.Subscriptions;
 using Microsoft.EntityFrameworkCore;
 
 namespace ExampleGraphQL.Data
 {
     public class Mutation
     {
-        //[Serial]
         //public async Task<Post?> UpdatePost([Service]
         //BlogDbContext context,Post model)
         //{
@@ -39,7 +39,9 @@ namespace ExampleGraphQL.Data
         //    }
         //}
         public async Task<Post?> CreatePost(
-           [Service]IPostRepository postRepository,string author,
+           [Service]IPostRepository postRepository, 
+           /*[Service] ITopicEventSender eventSender, */
+           string author,
            string content,string title)
         {
             Post newPost = new Post
@@ -49,6 +51,7 @@ namespace ExampleGraphQL.Data
                 Title=title
             };
             var createdPost = await postRepository.AddPost(newPost);
+           // await eventSender.SendAsync("PostCreated", createdPost);
             return createdPost;
         }
     }

@@ -7,7 +7,7 @@ namespace ExampleGraphQL.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public long Id { get; set; }
+        public int Id { get; set; }
         [Required]
         public string? Title { get; set; }
         [Required]

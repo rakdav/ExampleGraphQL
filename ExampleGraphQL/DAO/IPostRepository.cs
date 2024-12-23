@@ -6,7 +6,7 @@ namespace ExampleGraphQL.DAO
     {
         IQueryable<Post> GetAllPostsWithComments();
         IQueryable<Post> GetPostsOnly();
-        Task<Post> GetPostById(long Id);
+        Task<Post> GetPostById(int Id);
         Task<Post> AddPost(Post post);
     }
 }

@@ -7,7 +7,7 @@ namespace ExampleGraphQL.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public long Id { get; set; }
+        public int Id { get; set; }
         [Required]
         public string Content { get; set; }
         [Required]
@@ -15,7 +15,7 @@ namespace ExampleGraphQL.Models
         [Required]
         public string Author { get; set; }
         [ForeignKey("PostId")]
-        public Guid PostId { get; set; }
+        public int PostId { get; set; }
         public Post? Post { get; set; }
         public Comment()
         {

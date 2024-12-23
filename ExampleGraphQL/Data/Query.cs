@@ -11,7 +11,7 @@ namespace ExampleGraphQL.Data
         [GraphQLDescription("Method used to get list of all Posts")]
         public IQueryable<Post> GetPosts([Service] IPostRepository post) => post.GetPostsOnly();
         [UseProjection]
-        public async Task<Post> GetPostById([Service] IPostRepository postRepository, long id)
+        public async Task<Post> GetPostById([Service] IPostRepository postRepository, int id)
         {
             Post post =await postRepository.GetPostById(id);
             return post;
