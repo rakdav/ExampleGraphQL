@@ -47,10 +47,10 @@ namespace ExampleGraphQL.DAO
         //        await db.SaveChangesAsync();
         //    }
         //}
-        public Post GetPostById(Guid Id)
+        public Task<Post> GetPostById(long Id)
         {
             var post =  db.Posts.Include(p => p.Comments).
-                FirstOrDefault(p=>p.Id==Id);
+                FirstOrDefaultAsync(p=>p.Id==Id);
             if (post != null) return post!;
             return null!;
         }

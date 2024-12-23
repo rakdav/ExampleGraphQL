@@ -7,7 +7,7 @@ namespace ExampleGraphQL.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid Id { get; set; }
+        public long Id { get; set; }
         [Required]
         public string Content { get; set; }
         [Required]
@@ -19,7 +19,6 @@ namespace ExampleGraphQL.Models
         public Post? Post { get; set; }
         public Comment()
         {
-            Id = Guid.NewGuid();
             CreatedAt = DateTime.Now;
         }
     }
