@@ -10,29 +10,16 @@ namespace ExampleGraphQL.DAO
         {
             this.db = db;
         }
-        public Post AddPost(Post post)
-        {
-            db.Posts.Add(post);
-            db.SaveChanges();
-            return post;
-        }
         public IQueryable<Post> GetAllPostsWithComments() 
         {
             return db.Posts.Include(d => d.Comments);
         }
-
-        //public async Task<Post> AddPost(string title,string content,string author)
-        //{
-        //    Post post = new Post()
-        //    {
-        //        Author = author,
-        //        Content = content,
-        //        Title = title
-        //    };
-        //    db.Posts.Add(post);
-        //    await db.SaveChangesAsync();
-        //    return post;
-        //}
+        public async Task<Post> AddPost(Post post)
+        {
+            db.Posts.Add(post);
+            await db.SaveChangesAsync();
+            return post;
+        }
         //public async Task<Post> UpdatePost(Post model)
         //{
         //    var post = await db.Posts.Where(p => p.Id == model.Id).FirstOrDefaultAsync();
@@ -50,6 +37,7 @@ namespace ExampleGraphQL.DAO
         //    }
         //    return post!;
         //}
+
         //public async Task DeletePost(Guid id)
         //{
         //    var post = await db.Posts.Where(p => p.Id == id).FirstOrDefaultAsync();
@@ -66,7 +54,6 @@ namespace ExampleGraphQL.DAO
             if (post != null) return post!;
             return null!;
         }
-
         public IQueryable<Post> GetPostsOnly()
         {
             return db.Posts.AsQueryable();
