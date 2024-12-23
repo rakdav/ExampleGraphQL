@@ -11,7 +11,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IPostRepository, PostRepository>();
 builder.Services.AddScoped<ICommentRepository, CommentRepository>();
-builder.Services.AddGraphQLServer().AddQueryType<Query>().AddProjections().
+builder.Services.AddGraphQLServer().AddQueryType<Query>().
+    AddMutationType<Mutation>().AddProjections().
     AddSorting().AddFiltering();
 var app = builder.Build();
 if (app.Environment.IsDevelopment())

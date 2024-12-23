@@ -38,8 +38,7 @@ namespace ExampleGraphQL.Data
         //        await context.SaveChangesAsync();
         //    }
         //}
-        [Serial]
-        public async Task<Post?> InsertPost(
+        public async Task<Post?> CreatePost(
            [Service]IPostRepository postRepository,string author,
            string content,string title)
         {
