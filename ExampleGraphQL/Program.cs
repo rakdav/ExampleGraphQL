@@ -2,7 +2,6 @@ using ExampleGraphQL;
 using ExampleGraphQL.DAO;
 using ExampleGraphQL.Data;
 using Microsoft.EntityFrameworkCore;
-string AllowedOrigin = "allowedOrigin";
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<BlogDbContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
@@ -13,12 +12,6 @@ builder.Services.AddScoped<ICommentRepository, CommentRepository>();
 builder.Services.AddGraphQLServer().AddQueryType<Query>().
     AddMutationType<Mutation>().AddProjections().
     AddSorting().AddFiltering();
-builder.Services.AddCors(option =>
-{
-    option.AddPolicy(AllowedOrigin,
-        builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()
-        );
-});
 var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
@@ -28,13 +21,12 @@ if (app.Environment.IsDevelopment())
 }
 app.UseHttpsRedirection();
 app.UseRouting();
-//app.UseCors(cors => cors
-//.AllowAnyMethod()
-//.AllowAnyHeader()
-//.SetIsOriginAllowed(origin => true)
-//.AllowCredentials()
-//);
-app.UseCors(AllowedOrigin);
+app.UseCors(cors => cors
+.AllowAnyMethod()
+.AllowAnyHeader()
+.SetIsOriginAllowed(origin => true)
+.AllowCredentials()
+);
 app.UseWebSockets();
 using (var scope=app.Services.CreateScope())
 {
