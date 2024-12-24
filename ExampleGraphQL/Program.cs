@@ -12,10 +12,10 @@ builder.Services.AddScoped<IPostRepository, PostRepository>();
 builder.Services.AddScoped<ICommentRepository, CommentRepository>();
 builder.Services.AddGraphQLServer().AddQueryType<Query>().
     AddMutationType<Mutation>().AddProjections().
-    AddSorting().AddFiltering().AddInMemorySubscriptions();
+    AddSorting().AddFiltering();
 builder.Services.AddCors(option =>
 {
-    option.AddPolicy("allowedOrigin",
+    option.AddPolicy(AllowedOrigin,
         builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()
         );
 });
