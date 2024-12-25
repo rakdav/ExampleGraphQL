@@ -8,39 +8,19 @@ namespace ExampleGraphQL.Data
 {
     public class Mutation
     {
-        //public async Task<Post?> UpdatePost([Service]
-        //BlogDbContext context,Post model)
-        //{
-        //    var post = await context.Posts.Where(p => p.Id == model.Id).FirstOrDefaultAsync();
-        //    if (post != null)
-        //    {
-        //        if (!string.IsNullOrEmpty(model.Title))
-        //            post.Title = model.Title;
-        //        if (!string.IsNullOrEmpty(model.Content))
-        //            post.Content = model.Content;
-        //        if (!string.IsNullOrEmpty(model.Author))
-        //            post.Author = model.Author;
-        //        post.CreateAt = DateTime.Now;
-        //        context.Posts.Update(post);
-        //        await context.SaveChangesAsync();
-        //    }
-        //    return post;
-        //}
-        //[Serial]
-        //public async Task DeletePost(
-        //    [Service]
-        //BlogDbContext context, Guid id)
-        //{
-        //    var post = await context.Posts.Where(p => p.Id ==id).FirstOrDefaultAsync();
-        //    if (post != null)
-        //    {
-        //        context.Posts.Remove(post);
-        //        await context.SaveChangesAsync();
-        //    }
-        //}
+
+        public async Task<Post?> UpdatePost([Service] IPostRepository postRepository, Post model)
+        {
+           return await postRepository.UpdatePost(model);
+        }
+
+        public async Task<bool> DeletePost([Service] IPostRepository postRepository, int id)
+        {
+            return await postRepository.DeletePost(id);
+        }
+
         public async Task<Post?> CreatePost(
            [Service]IPostRepository postRepository, 
-           /*[Service] ITopicEventSender eventSender, */
            string author,
            string content,string title)
         {
@@ -51,7 +31,6 @@ namespace ExampleGraphQL.Data
                 Title=title
             };
             var createdPost = await postRepository.AddPost(newPost);
-           // await eventSender.SendAsync("PostCreated", createdPost);
             return createdPost;
         }
     }

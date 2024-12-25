@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics.CodeAnalysis;
 
 namespace ExampleGraphQL.Models
 {
@@ -16,7 +17,7 @@ namespace ExampleGraphQL.Models
         public DateTime? CreateAt { get; set; }
         [Required]
         public string? Author { get; set; }
-        public ICollection<Comment> Comments { get; set; }
+        public ICollection<Comment>? Comments { get; set; }
         public Post()
         {
             CreateAt = DateTime.Now;

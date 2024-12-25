@@ -8,5 +8,7 @@ namespace ExampleGraphQL.DAO
         IQueryable<Post> GetPostsOnly();
         Task<Post> GetPostById(int Id);
         Task<Post> AddPost(Post post);
+        Task<bool> DeletePost(int id);
+        Task<Post> UpdatePost(Post model);
     }
 }

@@ -20,33 +20,35 @@ namespace ExampleGraphQL.DAO
             await db.SaveChangesAsync();
             return post;
         }
-        //public async Task<Post> UpdatePost(Post model)
-        //{
-        //    var post = await db.Posts.Where(p => p.Id == model.Id).FirstOrDefaultAsync();
-        //    if (post != null)
-        //    {
-        //        if (!string.IsNullOrEmpty(model.Title))
-        //            post.Title = model.Title;
-        //        if (!string.IsNullOrEmpty(model.Content))
-        //            post.Content = model.Content;
-        //        if (!string.IsNullOrEmpty(model.Author))
-        //            post.Author = model.Author;
-        //        post.CreateAt = DateTime.Now;
-        //        db.Posts.Update(post);
-        //        await db.SaveChangesAsync();
-        //    }
-        //    return post!;
-        //}
+        public async Task<Post> UpdatePost(Post model)
+        {
+            var post = await db.Posts.Where(p => p.Id == model.Id).FirstOrDefaultAsync();
+            if (post != null)
+            {
+                if (!string.IsNullOrEmpty(model.Title))
+                    post.Title = model.Title;
+                if (!string.IsNullOrEmpty(model.Content))
+                    post.Content = model.Content;
+                if (!string.IsNullOrEmpty(model.Author))
+                    post.Author = model.Author;
+                post.CreateAt = DateTime.Now;
+                db.Posts.Update(post);
+                await db.SaveChangesAsync();
+            }
+            return post!;
+        }
 
-        //public async Task DeletePost(Guid id)
-        //{
-        //    var post = await db.Posts.Where(p => p.Id == id).FirstOrDefaultAsync();
-        //    if (post != null)
-        //    {
-        //        db.Posts.Remove(post);
-        //        await db.SaveChangesAsync();
-        //    }
-        //}
+        public async Task<bool> DeletePost(int id)
+        {
+            var post = await db.Posts.Where(p => p.Id == id).FirstOrDefaultAsync();
+            if (post != null)
+            {
+                db.Posts.Remove(post);
+                await db.SaveChangesAsync();
+                return true;
+            }
+            return false;
+        }
         public Task<Post> GetPostById(int Id)
         {
             var post =  db.Posts.Include(p => p.Comments).
