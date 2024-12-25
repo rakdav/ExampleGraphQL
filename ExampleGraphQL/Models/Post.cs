@@ -13,7 +13,6 @@ namespace ExampleGraphQL.Models
         public string? Title { get; set; }
         [Required]
         public string? Content { get; set; }
-        [Required]
         public DateTime? CreateAt { get; set; }
         [Required]
         public string? Author { get; set; }
